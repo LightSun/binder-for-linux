@@ -6,6 +6,7 @@
 
 #include <sys/ioctl.h>
 #include <driver/binder.h>
+#include <inttypes.h>
 
 struct binder_state;
 
