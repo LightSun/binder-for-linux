@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(SxUploadCore LANGUAGES C CXX)
+project(binder_for_linux LANGUAGES C CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
