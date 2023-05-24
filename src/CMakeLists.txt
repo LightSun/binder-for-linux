@@ -8,8 +8,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -fPIC -g -O0")
 set(CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} -fPIC -std=c11 -g -O0")
 
+include_directories(./)
 include_directories(include/)
 include_directories(liblog/include)
+include_directories(binder/include)
 include_directories(binder/include)
 
 add_compile_definitions(__ANDROID__)
@@ -25,7 +27,7 @@ file(GLOB_RECURSE SRC_BINDER binder/*.h binder/*.c binder/*.cpp)
 add_library(binder
     ${SRC_BINDER}
     )
-target_link_libraries(binder PUBLIC pthread)
+target_link_libraries(binder PUBLIC log)
 
 # servicemanager
 file(GLOB_RECURSE SRC_SM servicemanager/*.h
@@ -34,4 +36,10 @@ file(GLOB_RECURSE SRC_SM servicemanager/*.h
 add_library(servicemanager
     ${SRC_SM}
     )
+target_link_libraries(servicemanager PUBLIC binder)
+
+SET(DEPS log binder servicemanager)
+
+#
+add_subdirectory(sample/)
 

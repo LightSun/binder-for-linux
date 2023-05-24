@@ -6,7 +6,8 @@
 #include <string.h>
 #include <errno.h>
 
-#include "binder.h"
+#include "servicemanager/binder.h"
+#include "log/log.h"
 
 uint32_t svcmgr_lookup(struct binder_state *bs, uint32_t target, const char *name)
 {
@@ -54,8 +55,9 @@ int svcmgr_publish(struct binder_state *bs, uint32_t target, const char *name, v
     return status;
 }
 
-unsigned token;
+unsigned int token;
 
+//driver develop: https://blog.csdn.net/zhuguanlin121/article/details/121178922
 int main(int argc, char **argv)
 {
     struct binder_state *bs;

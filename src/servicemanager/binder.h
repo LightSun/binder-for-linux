@@ -5,8 +5,10 @@
 #define _BINDER_H_
 
 #include <sys/ioctl.h>
+#include <sys/types.h>
 #include <driver/binder.h>
 #include <inttypes.h>
+#include <unistd.h>
 
 struct binder_state;
 

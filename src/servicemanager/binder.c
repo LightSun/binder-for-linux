@@ -1,6 +1,10 @@
 /* Copyright 2008 The Android Open Source Project
  */
 
+#ifndef _GNU_SOURCE
+#define _GNU_SOURCE
+#endif
+
 #define LOG_TAG "Binder"
 
 #include <errno.h>
@@ -11,6 +15,7 @@
 #include <string.h>
 #include <sys/mman.h>
 #include <unistd.h>
+#include <errno.h>
 
 #include <log/log.h>
 
@@ -93,7 +98,10 @@ struct binder_state
     void *mapped;
     size_t mapsize;
 };
-
+//ioctl 是设备驱动程序中设备控制接口函数
+//Linux 中的设备有2种类型：字符设备(无缓冲且只能顺序存取)、
+//          块设备(有缓冲且可以随机存取)
+//          网络设备驱动。
 struct binder_state *binder_open(const char* driver, size_t mapsize)
 {
     struct binder_state *bs;
@@ -104,7 +112,7 @@ struct binder_state *binder_open(const char* driver, size_t mapsize)
         errno = ENOMEM;
         return NULL;
     }
-
+//FD_CLOEXEC vs O_CLOEXEC
     bs->fd = open(driver, O_RDWR | O_CLOEXEC);
     if (bs->fd < 0) {
         fprintf(stderr,"binder: cannot open %s (%s)\n",

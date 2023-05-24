@@ -24,7 +24,8 @@ typedef enum android_LogPriority {
     ANDROID_LOG_SILENT,     /* only for SetMinPriority(); must be last */
 } android_LogPriority;
 
-int __android_log_print(android_LogPriority priority, const char *tag, const char *fmt, ...);
+int __android_log_print(android_LogPriority priority, const char *tag,
+                        const char *fmt, ...);
 
 #ifndef LOG_NDEBUG
 #define LOG_NDEBUG 1
